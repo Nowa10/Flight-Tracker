@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte des Vols</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Inclure Leaflet pour la carte interactive -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="map.html">Carte des Vols</a></li>
+                <li><a href="about.html">À propos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Carte des Vols en Temps Réel</h1>
+        <iframe src="flights_map.html" width="100%" height="600" style="border:none;"></iframe>
+    </main>
+    <footer>
+        <p>&copy; 2024 Suivi des Vols. Tous droits réservés.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
