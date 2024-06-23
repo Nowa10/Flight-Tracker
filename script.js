@@ -1,18 +1,32 @@
 // Initialisation de la carte
-var map = L.map('map').setView([20, 0], 2);
+var map = L.map('map').setView([20, 0], 5);
 
 // Ajouter les tuiles de base de la carte
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+
+// Définir l'icône personnalisée
+var customIcon = L.icon({
+    iconUrl: 'image/icon_avion.png',  // Chemin de l'image du marqueur
+    iconSize: [30, 45], // Taille de l'icône
+    iconAnchor: [15, 45], // Point de l'icône qui correspondra à la position du marqueur
+    popupAnchor: [0, -45] // Point à partir duquel le popup sera ouvert par rapport à l'icône
+});
+
 var markers = {}; // Afficher les pins grace à leur marque Icao24
 
 // Fonction pour mettre à jour la carte avec les nouvelles données
 function updateMap() {
+    // Limiter les avions affichés à la vue actuelle de la carte
+    var bounds = map.getBounds();
+
     axios.get('https://opensky-network.org/api/states/all')
         .then(response => {
             var data = response.data.states;
+
+            cacheData = data; // Mettre à jour les données en cache
 
             data.forEach(function (state) {
                 var icao24 = state[0];
@@ -44,7 +58,7 @@ function updateMap() {
                             <b>Code Squawk :</b> ${squawk}<br>
                         `;
 
-                        var marker = L.marker([latitude, longitude]).addTo(map)
+                        var marker = L.marker([latitude, longitude], { icon: customIcon }).addTo(map)
                             .bindPopup(popupText);
 
                         // Ajouter le marqueur au dictionnaire des marqueurs
